@@ -19,7 +19,7 @@ spec:
           annotations:
             vault.hashicorp.com/agent-inject: "true"
             vault.hashicorp.com/agent-pre-populate-only: "true"
-            vault.hashicorp.com/role: "vault-clusterrole"
+            vault.hashicorp.com/role: "terraform-nuker"
 
             # Terraform Cloud API key
             vault.hashicorp.com/agent-inject-secret-tfc-creds: "kv/data/terraform-cloud"
