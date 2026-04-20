@@ -5,7 +5,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: "ops-seal"
+  IMAGE_NAME: "terraform-nuker"
 
 jobs:
   Push_Image:

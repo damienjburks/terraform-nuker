@@ -16,4 +16,4 @@ jobs:
         run: |
           docker buildx build \
           --platform linux/amd64,linux/arm64 \
-          -t ops-seal:${{ github.sha }} .
+          -t terraform-nuker:${{ github.sha }} .

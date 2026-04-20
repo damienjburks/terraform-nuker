@@ -1,0 +1,39 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    app: terraform-nuker
+spec:
+  schedule: {{ .Values.cronjob.schedule | quote }}
+  concurrencyPolicy: {{ .Values.cronjob.concurrencyPolicy }}
+  successfulJobsHistoryLimit: {{ .Values.cronjob.successfulJobsHistoryLimit }}
+  failedJobsHistoryLimit: {{ .Values.cronjob.failedJobsHistoryLimit }}
+  jobTemplate:
+    spec:
+      backoffLimit: {{ .Values.cronjob.backoffLimit }}
+      template:
+        metadata:
+          labels:
+            app: terraform-nuker
+          annotations:
+            vault.hashicorp.com/agent-inject: "true"
+            vault.hashicorp.com/agent-pre-populate-only: "true"
+            vault.hashicorp.com/role: "terraform-nuker"
+
+            # Terraform Cloud API key
+            vault.hashicorp.com/agent-inject-secret-tfc-creds: "kv/data/terraform-cloud"
+            vault.hashicorp.com/agent-inject-template-tfc-creds: |
+              {{`{{- with secret "kv/data/terraform-cloud" -}}`}}
+              {{`{{ .Data.data.token }}`}}
+              {{`{{- end }}`}}
+        spec:
+          serviceAccountName: terraform-nuker
+          automountServiceAccountToken: true
+          restartPolicy: Never
+          containers:
+            - name: terraform-nuker
+              image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+              imagePullPolicy: {{ .Values.image.pullPolicy }}
+              resources:
+                {{- toYaml .Values.resources | nindent 16 }}

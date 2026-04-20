@@ -1,5 +1,6 @@
 """
 TFC Client Module
+
 This module provides a TfcClient class for interacting with the Terraform Cloud API.
 It includes methods to fetch workspaces, check the last apply status, enable auto-apply,
 create destroy runs, and process organizations.
@@ -33,10 +34,10 @@ class TfcClient:
             "Authorization": f"Bearer {token}",
             "Content-Type": "application/vnd.api+json",
         }
-        self.org_list = ["DSB", "DJB-Personal"]
+        self.org_list = ["devsecblueprint", "damienjburks"]
         self.exclude_workspaces = {
-            "DJB-Personal": ["openvpn-server"],
-            "DSB": ["azure-devsecops-pipelines"],
+            "damienjburks": ["personal-website"],
+            "devsecblueprint": ["dsb-platform", "dsb-platform-dev", "the-herald"],
         }
 
     def get_workspaces(self, org_name):

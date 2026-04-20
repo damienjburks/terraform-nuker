@@ -1,5 +1,6 @@
 """
 Vault Secrets Loader Module
+
 This module provides a class to load secrets from Vault Agent-injected files.
 """
 

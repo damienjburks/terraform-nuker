@@ -31,12 +31,12 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build -t ops-seal:${{ github.sha }} .   ###- This section needed to be added becasue the image was not persisting between jobs--##
+          docker build -t terraform-nuker:${{ github.sha }} .   ###- This section needed to be added becasue the image was not persisting between jobs--##
 
       - name: Run Trivy Vulnerability Scanner
         uses: aquasecurity/trivy-action@0.28.0
         with:
-          image-ref: "ops-seal:${{ github.sha }}"
+          image-ref: "terraform-nuker:${{ github.sha }}"
           format: "sarif"
           output: "trivy-results.sarif"
           severity: "CRITICAL,HIGH"
@@ -57,8 +57,8 @@ jobs:
   #     # Run Docker Image in detached mode
   #     - name: Build Docker Image
   #       run: |
-  #         docker build -t ops-seal:${{ github.sha }} .
-  #         docker run -d -p 8080:8080 ops-seal:${{ github.sha }}
+  #         docker build -t terraform-nuker:${{ github.sha }} .
+  #         docker run -d -p 8080:8080 terraform-nuker:${{ github.sha }}
 
   #     - name: Wait for Docker container to be ready
   #       run: sleep 30

@@ -1,6 +1,6 @@
 apiVersion: v2
-name: ops-seal
-description: A Helm chart for deploying the ops-seal application
+name: terraform-nuker
+description: A Helm chart for deploying the terraform-nuker CronJob
 type: application
 version: 0.1.0
 appVersion: 1.0.0

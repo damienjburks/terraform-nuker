@@ -1,27 +1,19 @@
-replicaCount: 2
-
 image:
-  repository: ghcr.io/damienjburks/ops-seal
+  repository: ghcr.io/damienjburks/terraform-nuker
   tag: latest
   pullPolicy: Always
 
-service:
-  type: ClusterIP
-  port: 80
-  targetPort: 8080
+cronjob:
+  schedule: "0 7 * * *"  # Daily at 2 AM America/Chicago (UTC-5)
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  backoffLimit: 2
 
-ingress:
-  className: nginx
-  enabled: true
-  host: ops-seal.dsb-hub.local
-  annotations:
-    cert-manager.io/cluster-issuer: mkcert-issuer
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /
-    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
-  tls:
-    enabled: true
-    host: ops-seal.dsb-hub.local  
-    secretName: ops-seal-cert-tls
-
-resources: {}
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 250m
+    memory: 256Mi
