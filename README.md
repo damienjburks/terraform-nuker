@@ -5,13 +5,9 @@
 ![Vault](https://img.shields.io/badge/vault-enabled-black?logo=hashicorp)
 ![Kubernetes](https://img.shields.io/badge/k8s-CronJob-326CE5?logo=kubernetes)
 
-> :construction: This repository is a WIP... and is completely experimental for me! :construction:
-
 ## 🚀 Overview
 
 **Terraform Nuker** is a Kubernetes-native CronJob that automatically destroys Terraform Cloud workspaces on a schedule. It iterates through configured organizations, checks workspace state, enables auto-apply, and triggers destroy runs — useful for tearing down ephemeral or dev environments nightly.
-
----
 
 ## 🛠 Features
 
@@ -21,8 +17,6 @@
 - ⏩ Supports workspace exclusion lists
 - 🔁 Skips workspaces where the last apply was already a destroy
 - 📦 Helm chart for easy deployment
-
----
 
 ## ⚙️ Configuration
 
@@ -37,8 +31,6 @@ self.exclude_workspaces = {
 ```
 
 The CronJob schedule and other settings are in `helm/values.yaml`.
-
----
 
 ## 🚢 Deployment
 
