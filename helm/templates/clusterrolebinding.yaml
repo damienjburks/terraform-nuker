@@ -1,0 +1,14 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: terraform-nuker-vault-binding
+  labels:
+    app: terraform-nuker
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: vault-agent-injector-clusterrole
+subjects:
+  - kind: ServiceAccount
+    name: terraform-nuker
+    namespace: {{ .Release.Namespace }}
