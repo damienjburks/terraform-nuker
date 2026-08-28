@@ -37,7 +37,7 @@ class TfcClient:
         self.org_list = ["devsecblueprint", "damienjburks"]
         self.exclude_workspaces = {
             "damienjburks": ["personal-website"],
-            "devsecblueprint": ["dsb-platform", "dsb-platform-dev", "the-herald"],
+            "devsecblueprint": ["dsb-platform", "the-herald"],
         }
 
     def get_workspaces(self, org_name):
